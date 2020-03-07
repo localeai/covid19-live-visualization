@@ -3,8 +3,22 @@ export default function initialState() {
         layers: {},
         layersById: [],
         activeLayer: null,
-        geoData: [],
+        scatterplotData: null,
+        geojsonData: null,
         isLayersLoading: true,
-        isDataLoading: false
+        isDataLoading: false,
+        activeVisualization: "scatterplot",
+        visualizations: [
+            {
+                id: "scatterplot",
+                name: "Scatterplot",
+                icon: "bubble_chart",
+            },
+            {
+                id: "geojson",
+                name: "GeoJSON",
+                icon: "streetview"
+            }
+        ]
     }
 }

@@ -1,5 +1,9 @@
 import { types } from "./mutations";
-import { fetchBreif, fetchLatest, fetchTimeSeries } from "@/api/covid19";
+import {
+  fetchLayers,
+  fetchScatterplotLayer,
+  fetchGeoJSONLayer
+} from "@/api/covid19";
 
 export default {
   /**
@@ -20,18 +24,16 @@ export default {
   fetchLayers: async ({ commit }) => {
     try {
       commit(types.SET_LAYER_LOADING, true);
-      const response = await fetchBreif();
+      const response = await fetchLayers();
       const { status, data } = response;
       if (status === 200 && data) {
         /**
          * Store the layers as key value pairs
          */
-        let layers = Object.keys(data).reduce((result, key) => {
+        let layers = data.reduce((result, layer) => {
           return Object.assign(result, {
-            [key]: {
-              id: key,
-              name: key,
-              value: data[key]
+            [layer.id]: {
+              ...layer
             }
           });
         }, {});
@@ -40,18 +42,31 @@ export default {
       }
     } catch (error) {
       commit(types.SET_LAYER_LOADING, false);
+
       console.error(error);
     }
   },
   /**
    * Fetches Geo Data
    */
-  fetchGeoData: async ({ commit }) => {
+  fetchScatterplotLayerData: async ({ commit }) => {
     try {
-      const response = await fetchLatest();
+      const response = await fetchScatterplotLayer();
       const { status, data } = response;
       if (status === 200 && data) {
-        commit(types.SET_GEO_DATA, data);
+        commit(types.SET_SCATTER_PLOT_DATA, data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  fetchGeoJSONLayerData: async ({ commit }) => {
+    try {
+      const response = await fetchGeoJSONLayer();
+      const { status, data } = response;
+      if (status === 200 && data) {
+        commit(types.SET_GEO_JSON_DATA, data);
       }
     } catch (error) {
       console.error(error);
@@ -60,5 +75,8 @@ export default {
   /**
    * Fetch timeseries data
    */
-  fetchTimeSeriesData: async () => {}
+  fetchTimeSeriesData: async () => {},
+  setActiveVisualization: async ({ commit }, visualization) => {
+    commit(types.SET_ACTIVE_VISUALIZATION, visualization)
+  }
 };

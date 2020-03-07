@@ -1,9 +1,11 @@
 export const types = {
   SET_LAYERS: "SET_LAYERS",
   SET_ACTIVE_LAYER: "SET_ACTIVE_LAYER",
-  SET_GEO_DATA: "SET_GEO_DATA",
+  SET_SCATTER_PLOT_DATA: "SET_SCATTER_PLOT_LAYER",
+  SET_GEO_JSON_DATA: "SET_GEO_JSON_LAYER",
   SET_LAYER_LOADING: "SET_LAYER_LOADING",
-  SET_DATA_LOADING: "SET_DATA_LOADING"
+  SET_DATA_LOADING: "SET_DATA_LOADING",
+  SET_ACTIVE_VISUALIZATION: "SET_ACTIVE_VISUALIZATION"
 };
 
 export default {
@@ -15,13 +17,19 @@ export default {
   [types.SET_ACTIVE_LAYER]: (state, layerId) => {
     state.activeLayer = layerId;
   },
-  [types.SET_GEO_DATA]: (state, geoData) => {
-    state.geoData = geoData;
+  [types.SET_SCATTER_PLOT_DATA]: (state, data) => {
+    state.scatterplotData = data;
+  },
+  [types.SET_GEO_JSON_DATA]: (state, data) => {
+    state.geojsonData = data;
   },
   [types.SET_LAYER_LOADING]: (state, flag) => {
     state.isLayersLoading = flag;
   },
   [types.SET_DATA_LOADING]: (state, flag) => {
     state.isDataLoading = flag;
+  },
+  [types.SET_ACTIVE_VISUALIZATION]: (state, visualization) => {
+    state.activeVisualization = visualization;
   }
 };

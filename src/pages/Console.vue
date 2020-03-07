@@ -9,6 +9,7 @@
         :layers="[getActiveGeoLayer]"
       />
       <LayersPanel :layers="getLayers" />
+      <MapChooser :visualizations="getVisualizations" />
     </div>
   </div>
 </template>
@@ -17,6 +18,7 @@
 import TopBar from "@/components/TopBar";
 import DeckGL from "@/modules/Visualizer/DeckGL";
 import LayersPanel from "@/modules/LayerManager/LayersPanel";
+import MapChooser from "@/modules/MapManager/MapChooser";
 import { fetchBreif } from "@/api/covid19";
 import { mapGetters, mapActions } from "vuex";
 
@@ -24,7 +26,8 @@ export default {
   components: {
     TopBar,
     DeckGL,
-    LayersPanel
+    LayersPanel,
+    MapChooser
   },
   data() {
     return {
@@ -32,13 +35,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("Covid19", ["getLayers", "getGeoData", "getActiveGeoLayer"]),
+    ...mapGetters("Covid19", ["getLayers", "getGeoData", "getActiveGeoLayer", "getVisualizations"]),
     getAccessToken() {
       return process.env.VUE_APP_MAPBOX_TOKEN;
     }
   },
   methods: {
-    ...mapActions("Covid19", ["fetchLayers", "fetchGeoData"])
+    ...mapActions("Covid19", ["fetchLayers", "fetchScatterplotLayerData", "fetchGeoJSONLayerData"])
   },
   watch: {
     getActiveGeoLayer(value) {
@@ -47,7 +50,8 @@ export default {
   },
   mounted() {
     this.fetchLayers();
-    this.fetchGeoData();
+    this.fetchScatterplotLayerData();
+    this.fetchGeoJSONLayerData();
   }
 };
 </script>
@@ -62,6 +66,7 @@ export default {
     display: flex;
     height: 100%;
     position: relative;
+    overflow: hidden;
   }
 }
 </style>

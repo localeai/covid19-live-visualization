@@ -1,28 +1,19 @@
 import { covid19Api } from './client';
 
-/**
- * Fetches the latest statistics for the virus
- */
-const fetchBreif = () => {
-    return covid19Api.get('/brief');
+const fetchLayers = () => {
+    return covid19Api.get('/layers.json');
 }
 
-/**
- * Fetches the latest data for countries
- */
-const fetchLatest = () => {
-    return covid19Api.get('/latest');
+const fetchScatterplotLayer = () => {
+    return covid19Api.get('/sctterplot.json');
 }
 
-/**
- * Fetches the timeseries data
- */
-const fetchTimeSeries = () => {
-    return covid19Api.get('/timeseries');
+const fetchGeoJSONLayer = () => {
+    return covid19Api.get('/geo.json');
 }
 
 export {
-    fetchBreif,
-    fetchLatest,
-    fetchTimeSeries
+    fetchLayers,
+    fetchScatterplotLayer,
+    fetchGeoJSONLayer
 }
