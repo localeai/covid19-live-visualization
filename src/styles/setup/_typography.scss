@@ -1,0 +1,66 @@
+body {
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  font-weight: 400px;
+  line-height: 20px;
+  font-family: "Inter", sans-serif;
+  color: var(--font-color, #3d3d3d); // set this in _themes.scss
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  span,
+  li,
+  div {
+    font-family: "Inter", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  h1 {
+    line-height: 30px;
+  }
+}
+
+// =======================================================
+// font color modification classes
+.fc {
+  color: var(--font-color);
+}
+
+.fc-primary {
+  color: var(--color-primary);
+}
+
+.fc-secondary {
+  color: var(--color-secondary);
+}
+
+// =======================================================
+// font size modification classes
+.fs-small {
+  font-size: 0.8em;
+}
+
+.fs-normal {
+  font-size: 1em;
+}
+
+.fs-medium {
+  font-size: 1.2em;
+}
+
+.fs-large {
+  font-size: 1.5em;
+}
+
+.fs-xl {
+  font-size: 2em;
+}
+
+.fs-xxl {
+  font-size: 3em;
+}

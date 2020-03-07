@@ -1,0 +1,10 @@
+// setups
+@import "./setup/normalize";
+@import "./setup/layout";
+@import "./setup/mixins";
+@import "./setup/typography";
+@import "./setup/icons";
+
+// themes
+@import "./themes/light";
+@import "./themes/dark";
