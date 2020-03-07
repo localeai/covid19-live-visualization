@@ -1,4 +1,4 @@
-# google-data-visualizer
+# covid19-data-visualizer
 
 ## Project setup
 ```
