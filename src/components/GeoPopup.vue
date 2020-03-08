@@ -91,6 +91,10 @@ export default {
       &:nth-child(odd) {
         background: #0f1b3133;
       }
+
+      &:last-child {
+        border-radius: 0 0 5px 5px;
+      }
     }
   }
 }

@@ -98,6 +98,7 @@ export default {
 
   .loader-wrapper {
     background-color: var(--color-primary);
+    border-radius: 0 0 5px 5px;
   }
 
   .panel-header {
