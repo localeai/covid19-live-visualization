@@ -1,7 +1,7 @@
 <template>
   <div class="link-wrapper">
     <div class="github-link">
-      <a href="https://github.com/haxzie/covid19-live-visualization" target="_blank" rel="noopener">
+      <a href="https://github.com/localeai/covid19-live-visualization" target="_blank" rel="noopener">
         <img src="@/assets/github.svg" />
       </a>
     </div>
