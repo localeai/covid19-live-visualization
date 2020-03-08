@@ -9,6 +9,7 @@
         :layers="geoLayers"
         @viewStateChange="hidePopup"
       />
+      <Branding />
       <LayersPanel :layers="getLayers" />
       <MapChooser :visualizations="getVisualizations" />
       <GeoPopup />
@@ -23,6 +24,7 @@ import LayersPanel from "@/modules/LayerManager/LayersPanel";
 import MapChooser from "@/modules/MapManager/MapChooser";
 import GeoPopup from "@/components/GeoPopup";
 import { mapGetters, mapActions } from "vuex";
+import Branding from "@/components/Branding";
 
 export default {
   components: {
@@ -30,7 +32,8 @@ export default {
     DeckGL,
     LayersPanel,
     MapChooser,
-    GeoPopup
+    GeoPopup,
+    Branding
   },
   data() {
     return {
