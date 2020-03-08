@@ -5,7 +5,7 @@ import {
   fetchGeoJSONLayer
 } from "@/api/covid19";
 import { ScatterplotLayer, GeoJsonLayer } from "@deck.gl/layers";
-import chroma, { limits, scale } from 'chroma-js';
+import chroma, { limits, scale } from "chroma-js";
 
 function getRangeIndex(range, item) {
   for (let i = 0; i < range.length - 1; i++) {
@@ -193,13 +193,29 @@ export default {
           },
           onHover: (info, event) => {
             if (info.object) {
+              const rootElement = event.rootElement;
+              const { offsetWidth, offsetHeight } = rootElement;
               const { object, x, y } = info;
+              let itemX, itemY;
+
+              if (offsetWidth - x < 300) {
+                itemX = offsetWidth - 300;
+              } else {
+                itemX = x;
+              }
+
+              if (offsetHeight - y < 300) {
+                itemY = offsetHeight - (250 + (offsetHeight - y));
+              } else {
+                itemY = y;
+              }
+
               commit(types.SET_POPUP_DATA, {
                 title: object.province || object.country,
                 description: `${object.country_code} ${object.country}`,
                 ...object.data,
-                x,
-                y,
+                x: itemX,
+                y: itemY,
                 show: true
               });
             } else {
@@ -229,13 +245,29 @@ export default {
           },
           onHover: (info, event) => {
             if (info.object) {
+              const rootElement = event.rootElement;
+              const { offsetWidth, offsetHeight } = rootElement;
               const { object, x, y } = info;
+              let itemX, itemY;
+
+              if (offsetWidth - x < 300) {
+                itemX = offsetWidth - 300;
+              } else {
+                itemX = x;
+              }
+
+              if (offsetHeight - y < 300) {
+                itemY = offsetHeight - (250 + (offsetHeight - y));
+              } else {
+                itemY = y;
+              }
+
               commit(types.SET_POPUP_DATA, {
                 title: object.properties.name,
                 description: object.id,
                 ...object.properties.data,
-                x,
-                y,
+                x: itemX,
+                y: itemY,
                 show: true
               });
             } else {

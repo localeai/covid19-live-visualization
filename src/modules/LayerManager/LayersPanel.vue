@@ -50,7 +50,7 @@ export default {
   },
   data() {
     return {
-      showPanel: true
+      showPanel: false
     };
   },
   computed: {

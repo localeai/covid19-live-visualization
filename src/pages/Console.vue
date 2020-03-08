@@ -9,7 +9,7 @@
         :layers="geoLayers"
         @viewStateChange="hidePopup"
       />
-      <!-- <Branding /> -->
+      <GitHubLink/>
       <LayersPanel :layers="getLayers" />
       <MapChooser :visualizations="getVisualizations" />
       <GeoPopup />
@@ -24,7 +24,7 @@ import LayersPanel from "@/modules/LayerManager/LayersPanel";
 import MapChooser from "@/modules/MapManager/MapChooser";
 import GeoPopup from "@/components/GeoPopup";
 import { mapGetters, mapActions } from "vuex";
-import Branding from "@/components/Branding";
+import GitHubLink from "@/components/GitHubLink";
 
 export default {
   components: {
@@ -33,7 +33,7 @@ export default {
     LayersPanel,
     MapChooser,
     GeoPopup,
-    Branding
+    GitHubLink
   },
   data() {
     return {
