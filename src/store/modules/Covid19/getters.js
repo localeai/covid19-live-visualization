@@ -1,4 +1,5 @@
 import { ScatterplotLayer, GeoJsonLayer } from "@deck.gl/layers";
+import chroma, { limits, scale } from 'chroma-js';
 
 export default {
   /**
@@ -41,13 +42,10 @@ export default {
           lineWidthMinPixels: 1,
           getPosition: d => d.location.map(item => parseFloat(item)),
           getRadius: d => d.data[state.activeLayer] * 1000,
-          getFillColor: d => [
-            255,
-            (state.layers[state.activeLayer].value /
-              d.data[state.activeLayer]) /
-              255,
-            0
-          ],
+          getFillColor: d => {
+            if (d.data[state.activeLayer]) return d.colors[state.activeLayer];
+            else return [0, 0, 0, 0]
+          },
           onClick: (i, e) => {
             console.log({ i, e });
           }
@@ -58,16 +56,20 @@ export default {
         return new GeoJsonLayer({
           id: `${state.activeLayer}_geojson`,
           data: state.geojsonData,
+          dataTransform: data => {
+            console.log(data);
+            return data;
+          },
           pickable: true,
           stroked: false,
           filled: true,
-          getFillColor: d => [
-            255,
-            (state.layers[state.activeLayer].value /
-              d.properties.data[state.activeLayer]) /
-              255,
-            0
-          ]
+          getFillColor: d => {
+            if (d.properties.data[state.activeLayer] !== 0) {
+              return d.properties.colors[state.activeLayer]
+            } else {
+              return [0, 0, 0, 0]
+            }
+          }
         });
       }
     }

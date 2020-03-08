@@ -35,7 +35,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("Covid19", ["getLayers", "getGeoData", "getActiveGeoLayer", "getVisualizations"]),
+    ...mapGetters("Covid19", ["getLayers", "getActiveGeoLayer", "getVisualizations"]),
     getAccessToken() {
       return process.env.VUE_APP_MAPBOX_TOKEN;
     }
