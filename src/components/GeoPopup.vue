@@ -1,6 +1,5 @@
 <template>
-  <SlideYUpTransition>
-    <div v-if="getPopupData && getPopupData.show" class="geopopup" :style="{ left: `${getPopupData.x +10}px`, top: `${getPopupData.y +15}px`}">
+    <div v-if="getPopupData && getPopupData.show" class="geopopup" :style="{ transform: `translate(${getPopupData.x +10}px, ${getPopupData.y +15}px )`}">
       <div class="popup-header">
         <i class="material-icons header-icon">bug_report</i>
         <div class="text-area">
@@ -23,7 +22,6 @@
         </div>
       </div>
     </div>
-  </SlideYUpTransition>
 </template>
 
 <script>
