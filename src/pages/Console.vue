@@ -9,7 +9,7 @@
         :layers="geoLayers"
         @viewStateChange="hidePopup"
       />
-      <Branding />
+      <!-- <Branding /> -->
       <LayersPanel :layers="getLayers" />
       <MapChooser :visualizations="getVisualizations" />
       <GeoPopup />
