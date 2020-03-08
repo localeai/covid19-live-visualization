@@ -7,10 +7,11 @@
         :latitude="0"
         :longitude="0"
         :layers="geoLayers"
+        @viewStateChange="hidePopup"
       />
       <LayersPanel :layers="getLayers" />
       <MapChooser :visualizations="getVisualizations" />
-      <GeoPopup/>
+      <GeoPopup />
     </div>
   </div>
 </template>
@@ -33,20 +34,34 @@ export default {
   },
   data() {
     return {
-      geoLayers: [],
-      
+      geoLayers: []
     };
   },
   computed: {
-    ...mapGetters("Covid19", ["getLayers", "getVisualizations"]),
+    ...mapGetters("Covid19", [
+      "getLayers",
+      "getVisualizations",
+      "getPopupData"
+    ]),
     getAccessToken() {
       return process.env.VUE_APP_MAPBOX_TOKEN;
     }
   },
   methods: {
-    ...mapActions("Covid19", ["fetchLayers", "fetchScatterplotLayerData", "fetchGeoJSONLayerData", "getActiveGeoLayer"]),
+    ...mapActions("Covid19", [
+      "fetchLayers",
+      "fetchScatterplotLayerData",
+      "fetchGeoJSONLayerData",
+      "getActiveGeoLayer",
+      "setPopupData"
+    ]),
     async loadLayers() {
-      this.geoLayers = [await this.getActiveGeoLayer()]
+      this.geoLayers = [await this.getActiveGeoLayer()];
+    },
+    hidePopup() {
+      if (this.getPopupData.show) {
+        this.setPopupData({ show: false });
+      }
     }
   },
   watch: {

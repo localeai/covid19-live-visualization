@@ -64,6 +64,7 @@ export default {
           bearing: viewState.bearing,
           pitch: viewState.pitch
         });
+        this.$emit("viewStateChange");
       }
     });
 
