@@ -19,6 +19,7 @@ export default function initialState() {
                 name: "GeoJSON",
                 icon: "streetview"
             }
-        ]
+        ],
+        popupData: null
     }
 }

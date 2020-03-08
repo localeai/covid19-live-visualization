@@ -4,7 +4,8 @@ import {
   fetchScatterplotLayer,
   fetchGeoJSONLayer
 } from "@/api/covid19";
-import chroma, { scale, limits } from "chroma-js";
+import { ScatterplotLayer, GeoJsonLayer } from "@deck.gl/layers";
+import chroma, { limits, scale } from 'chroma-js';
 
 function getRangeIndex(range, item) {
   for (let i = 0; i < range.length - 1; i++) {
@@ -130,10 +131,23 @@ export default {
               ...item.properties,
               colors: {
                 confirmed:
-                  colors[getRangeIndex(confirmedBuckets, item.properties.data.confirmed)],
-                deaths: colors[getRangeIndex(deathsBuckets, item.properties.data.deaths)],
+                  colors[
+                    getRangeIndex(
+                      confirmedBuckets,
+                      item.properties.data.confirmed
+                    )
+                  ],
+                deaths:
+                  colors[
+                    getRangeIndex(deathsBuckets, item.properties.data.deaths)
+                  ],
                 recovered:
-                  colors[getRangeIndex(recoveredBuckets, item.properties.data.recovered)]
+                  colors[
+                    getRangeIndex(
+                      recoveredBuckets,
+                      item.properties.data.recovered
+                    )
+                  ]
               }
             }
           };
@@ -145,10 +159,91 @@ export default {
     }
   },
   /**
-   * Fetch timeseries data
+   * Sets active visualization type
    */
-  fetchTimeSeriesData: async () => {},
   setActiveVisualization: async ({ commit }, visualization) => {
     commit(types.SET_ACTIVE_VISUALIZATION, visualization);
+  },
+  setPopupData: async ({ commit }, data) => {
+    commit(types.SET_POPUP_DATA, data);
+  },
+  getActiveGeoLayer: async ({ state, commit }) => {
+    if (state.activeVisualization === "scatterplot") {
+      if (
+        state.activeLayer &&
+        state.scatterplotData &&
+        state.scatterplotData.length > 0
+      ) {
+        return new ScatterplotLayer({
+          id: `${state.activeLayer}_scatter`,
+          data: state.scatterplotData,
+          pickable: true,
+          opacity: 0.8,
+          stroked: false,
+          filled: true,
+          radiusScale: 6,
+          radiusMinPixels: 5,
+          radiusMaxPixels: 15,
+          lineWidthMinPixels: 1,
+          getPosition: d => d.location.map(item => parseFloat(item)),
+          getRadius: d => d.data[state.activeLayer] * 1000,
+          getFillColor: d => {
+            if (d.data[state.activeLayer]) return d.colors[state.activeLayer];
+            else return [0, 0, 0, 0];
+          },
+          onHover: (info, event) => {
+            if (info.object) {
+              const { object, x, y } = info;
+              commit(types.SET_POPUP_DATA, {
+                title: object.province || object.country,
+                description: `${object.country_code} ${object.country}`,
+                ...object.data,
+                x,
+                y,
+                show: true
+              });
+            } else {
+              commit(types.SET_POPUP_DATA, { show: false });
+            }
+          }
+        });
+      }
+    } else {
+      if (state.activeLayer && state.geojsonData) {
+        return new GeoJsonLayer({
+          id: `${state.activeLayer}_geojson`,
+          data: state.geojsonData,
+          dataTransform: data => {
+            console.log(data);
+            return data;
+          },
+          pickable: true,
+          stroked: false,
+          filled: true,
+          getFillColor: d => {
+            if (d.properties.data[state.activeLayer] !== 0) {
+              return d.properties.colors[state.activeLayer];
+            } else {
+              return [0, 0, 0, 0];
+            }
+          },
+          onHover: (info, event) => {
+            if (info.object) {
+              const { object, x, y } = info;
+              commit(types.SET_POPUP_DATA, {
+                title: object.properties.name,
+                description: object.id,
+                ...object.properties.data,
+                x,
+                y,
+                show: true
+              });
+            } else {
+              commit(types.SET_POPUP_DATA, { show: false });
+            }
+          }
+        });
+      }
+    }
   }
 };

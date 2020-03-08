@@ -5,7 +5,8 @@ export const types = {
   SET_GEO_JSON_DATA: "SET_GEO_JSON_LAYER",
   SET_LAYER_LOADING: "SET_LAYER_LOADING",
   SET_DATA_LOADING: "SET_DATA_LOADING",
-  SET_ACTIVE_VISUALIZATION: "SET_ACTIVE_VISUALIZATION"
+  SET_ACTIVE_VISUALIZATION: "SET_ACTIVE_VISUALIZATION",
+  SET_POPUP_DATA: "SET_POPUP_DATA"
 };
 
 export default {
@@ -31,5 +32,8 @@ export default {
   },
   [types.SET_ACTIVE_VISUALIZATION]: (state, visualization) => {
     state.activeVisualization = visualization;
+  },
+  [types.SET_POPUP_DATA]: (state, data) => {
+    state.popupData = data;
   }
 };

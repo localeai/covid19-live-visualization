@@ -6,10 +6,11 @@
         :accessToken="getAccessToken"
         :latitude="0"
         :longitude="0"
-        :layers="[getActiveGeoLayer]"
+        :layers="geoLayers"
       />
       <LayersPanel :layers="getLayers" />
       <MapChooser :visualizations="getVisualizations" />
+      <GeoPopup/>
     </div>
   </div>
 </template>
@@ -19,7 +20,7 @@ import TopBar from "@/components/TopBar";
 import DeckGL from "@/modules/Visualizer/DeckGL";
 import LayersPanel from "@/modules/LayerManager/LayersPanel";
 import MapChooser from "@/modules/MapManager/MapChooser";
-import { fetchBreif } from "@/api/covid19";
+import GeoPopup from "@/components/GeoPopup";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -27,28 +28,36 @@ export default {
     TopBar,
     DeckGL,
     LayersPanel,
-    MapChooser
+    MapChooser,
+    GeoPopup
   },
   data() {
     return {
-      geoLayers: []
+      geoLayers: [],
+      
     };
   },
   computed: {
-    ...mapGetters("Covid19", ["getLayers", "getActiveGeoLayer", "getVisualizations"]),
+    ...mapGetters("Covid19", ["getLayers", "getVisualizations"]),
     getAccessToken() {
       return process.env.VUE_APP_MAPBOX_TOKEN;
     }
   },
   methods: {
-    ...mapActions("Covid19", ["fetchLayers", "fetchScatterplotLayerData", "fetchGeoJSONLayerData"])
-  },
-  watch: {
-    getActiveGeoLayer(value) {
-      console.log(value)
+    ...mapActions("Covid19", ["fetchLayers", "fetchScatterplotLayerData", "fetchGeoJSONLayerData", "getActiveGeoLayer"]),
+    async loadLayers() {
+      this.geoLayers = [await this.getActiveGeoLayer()]
     }
   },
-  mounted() {
+  watch: {
+    getLayers(value) {
+      this.loadLayers();
+    },
+    getVisualizations(value) {
+      this.loadLayers();
+    }
+  },
+  async mounted() {
     this.fetchLayers();
     this.fetchScatterplotLayerData();
     this.fetchGeoJSONLayerData();
