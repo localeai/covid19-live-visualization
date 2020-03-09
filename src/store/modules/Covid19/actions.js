@@ -64,7 +64,7 @@ export default {
       const response = await fetchScatterplotLayer();
       const { status, data } = response;
       if (status === 200 && data) {
-        const colors = scale(["#fcba03", "#fc0362"])
+        const colors = scale(["#fcba03", "#fc0339"])
           .mode("lch")
           .colors(10)
           .map(item => chroma(item).rgb());
@@ -183,10 +183,10 @@ export default {
           filled: true,
           radiusScale: 6,
           radiusMinPixels: 5,
-          radiusMaxPixels: 15,
+          radiusMaxPixels: 30,
           lineWidthMinPixels: 1,
           getPosition: d => d.location.map(item => parseFloat(item)),
-          getRadius: d => d.data[state.activeLayer] * 1000,
+          getRadius: d => d.data[state.activeLayer] * 50,
           getFillColor: d => {
             if (d.data[state.activeLayer]) return d.colors[state.activeLayer];
             else return [0, 0, 0, 0];
