@@ -78,9 +78,9 @@ export default {
           { confirmed: [], deaths: [], recovered: [] }
         );
 
-        const confirmedBuckets = limits(numbers.confirmed, "q", 10);
-        const deathsBuckets = limits(numbers.deaths, "q", 10);
-        const recoveredBuckets = limits(numbers.recovered, "q", 10);
+        const confirmedBuckets = limits(numbers.confirmed.filter(item => item!== 0), "l", 10);
+        const deathsBuckets = limits(numbers.deaths.filter(item => item!== 0), "l", 10);
+        const recoveredBuckets = limits(numbers.recovered.filter(item => item!== 0), "l", 10);
 
         const coloredData = data.map(item => {
           return {
@@ -120,9 +120,9 @@ export default {
           { confirmed: [], deaths: [], recovered: [] }
         );
 
-        const confirmedBuckets = limits(numbers.confirmed, "q", 10);
-        const deathsBuckets = limits(numbers.deaths, "q", 10);
-        const recoveredBuckets = limits(numbers.recovered, "q", 10);
+        const confirmedBuckets = limits(numbers.confirmed.filter(item => item!== 0), "l", 10);
+        const deathsBuckets = limits(numbers.deaths.filter(item => item!== 0), "l", 10);
+        const recoveredBuckets = limits(numbers.recovered.filter(item => item!== 0), "l", 10);
 
         const coloredData = data.features.map(item => {
           return {
