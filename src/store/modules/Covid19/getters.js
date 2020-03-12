@@ -32,5 +32,8 @@ export default {
     } else {
       return null;
     }
+  },
+  getLastUpdated: state => {
+    return state.lastUpdated;
   }
 };

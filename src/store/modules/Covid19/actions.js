@@ -4,6 +4,8 @@ import {
   fetchScatterplotLayer,
   fetchGeoJSONLayer
 } from "@/api/covid19";
+import { getLatestCommit } from "@/api/github";
+
 import { ScatterplotLayer, GeoJsonLayer } from "@deck.gl/layers";
 import chroma, { limits, scale } from "chroma-js";
 
@@ -276,6 +278,23 @@ export default {
           }
         });
       }
+    }
+  },
+  /**
+   * Fetches the last updated data from the api repository
+   */
+  fetchLastUpdated: async ({ commit }) => {
+    try {
+      const response = await getLatestCommit();
+      const { status, data } = response;
+      if (status === 200 && data) {
+        const { commit: { author: { date } }} = data;
+        const _date = new Date(date);
+        const formattedDate = `${_date.getDate()}/${_date.getMonth()+1}/${_date.getFullYear()}`
+        commit(types.SET_LAST_UPDATED, formattedDate);
+      }
+    } catch(error) {
+      console.error(error);
     }
   }
 };

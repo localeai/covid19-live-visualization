@@ -6,7 +6,8 @@ export const types = {
   SET_LAYER_LOADING: "SET_LAYER_LOADING",
   SET_DATA_LOADING: "SET_DATA_LOADING",
   SET_ACTIVE_VISUALIZATION: "SET_ACTIVE_VISUALIZATION",
-  SET_POPUP_DATA: "SET_POPUP_DATA"
+  SET_POPUP_DATA: "SET_POPUP_DATA",
+  SET_LAST_UPDATED: "SET_LAST_UPDATED"
 };
 
 export default {
@@ -35,5 +36,8 @@ export default {
   },
   [types.SET_POPUP_DATA]: (state, data) => {
     state.popupData = data;
+  },
+  [types.SET_LAST_UPDATED]: (state, data) => {
+    state.lastUpdated = data;
   }
 };

@@ -28,6 +28,7 @@
           :isActive="layer.isActive"
           @click="setActiveLayer({ layerId: layer.id })"
         />
+        <SourceDetails :lastUpdated="getLastUpdated" :sourceURL="'https://github.com/CSSEGISandData/COVID-19'" :sourceName="'Johns Hopkins CSSE'"/>
       </div>
     </ScaleTransition>
   </div>
@@ -38,6 +39,7 @@ import LayerItem from "./LayerItem";
 import { mapActions, mapGetters } from "vuex";
 import { ScaleTransition } from "vue2-transitions";
 import Loader from "@/components/Loader";
+import SourceDetails from "@/modules/LayerManager/SourceDetails";
 
 export default {
   props: {
@@ -46,7 +48,8 @@ export default {
   components: {
     LayerItem,
     ScaleTransition,
-    Loader
+    Loader,
+    SourceDetails
   },
   data() {
     return {
@@ -54,13 +57,16 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("Covid19", ["isLayersLoading"])
+    ...mapGetters("Covid19", ["isLayersLoading", "getLastUpdated"]),
   },
   methods: {
-    ...mapActions("Covid19", ["setActiveLayer"]),
+    ...mapActions("Covid19", ["setActiveLayer", "fetchLastUpdated"]),
     togglePanel() {
       this.showPanel = !this.showPanel;
     }
+  },
+  mounted() {
+    this.fetchLastUpdated();
   }
 };
 </script>

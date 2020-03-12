@@ -20,6 +20,7 @@ export default function initialState() {
                 icon: "streetview"
             }
         ],
-        popupData: null
+        popupData: null,
+        lastUpdated: null,
     }
 }
