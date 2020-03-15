@@ -1,6 +1,6 @@
 # COVID19 Visualization
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 > Please note. The data used in the visualization is from an [opensource project](https://github.com/ExpDev07/coronavirus-tracker-api). We don't guarantee accurate numbers, but we are trying our best to find a reliable source of data.
 
@@ -57,6 +57,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="http://haxzie.com"><img src="https://avatars1.githubusercontent.com/u/53584487?v=4" width="100px;" alt=""/><br /><sub><b>Musthaq Ahamad</b></sub></a><br /><a href="#design-haxzie" title="Design">🎨</a> <a href="https://github.com/localeai/covid19-live-visualization/commits?author=haxzie" title="Code">💻</a></td>
+    <td align="center"><a href="https://rumaan.me"><img src="https://avatars1.githubusercontent.com/u/18492868?v=4" width="100px;" alt=""/><br /><sub><b>Rumaan Khalander</b></sub></a><br /><a href="https://github.com/localeai/covid19-live-visualization/commits?author=rumaan" title="Code">💻</a></td>
   </tr>
 </table>
 
