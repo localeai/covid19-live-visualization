@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "haxzie",
+      "name": "Musthaq Ahamad",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/53584487?v=4",
+      "profile": "http://haxzie.com",
+      "contributions": [
+        "design"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "covid19-live-visualization",
+  "projectOwner": "localeai",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
