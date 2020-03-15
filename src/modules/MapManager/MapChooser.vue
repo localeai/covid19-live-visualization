@@ -1,21 +1,14 @@
 <template>
   <div class="map-chooser-wrapper">
     <scale-transition>
-      <i
-        v-show="!isPanelShown"
-        class="material-icons panel-toggle"
-        @click="togglePanel()"
-        >map</i
-      >
+      <i v-show="!isPanelShown" class="material-icons panel-toggle" @click="togglePanel()">map</i>
     </scale-transition>
     <SlideXRightTransition>
       <div v-show="isPanelShown" class="maps-panel">
         <div class="panel-header">
           <i class="material-icons md-18">map</i>
           <h3 class="title">Visualization</h3>
-          <i class="material-icons md-18 close-btn" @click="togglePanel"
-            >clear</i
-          >
+          <i class="material-icons md-18 close-btn" @click="togglePanel">clear</i>
         </div>
         <div
           v-for="viz in visualizations"
@@ -43,15 +36,15 @@ export default {
     ScaleTransition,
     SlideXRightTransition
   },
-  data() {
-    return {
-      isPanelShown: false
-    };
+  computed: {
+    isPanelShown() {
+      return this.$store.state.controls.isVisualizationsVisible;
+    }
   },
   methods: {
     ...mapActions("Covid19", ["setActiveVisualization"]),
     togglePanel() {
-      this.isPanelShown = !this.isPanelShown;
+      this.$store.commit("setVisualizationsControlVisible", !this.isPanelShown);
     }
   }
 };

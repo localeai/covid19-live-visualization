@@ -9,10 +9,17 @@
         :layers="geoLayers"
         @viewStateChange="hidePopup"
       />
-      <GitHubLink/>
-      <LayersPanel :layers="getLayers" />
-      <MapChooser :visualizations="getVisualizations" />
-      <GeoPopup />
+
+      <!-- Controls Layer -->
+      <div id="controls">
+        <GitHubLink />
+        <LayersPanel :layers="getLayers" />
+        <MapChooser :visualizations="getVisualizations" />
+        <GeoPopup />
+      </div>
+
+      <!-- Hidden Layer -->
+      <div @click="setHiddenLayer" v-if="isHiddenLayerVisible" id="hidden-layer"></div>
     </div>
   </div>
 </template>
@@ -25,6 +32,7 @@ import MapChooser from "@/modules/MapManager/MapChooser";
 import GeoPopup from "@/components/GeoPopup";
 import { mapGetters, mapActions } from "vuex";
 import GitHubLink from "@/components/GitHubLink";
+import log from "@deck.gl/core/dist/es5/utils/log";
 
 export default {
   components: {
@@ -46,6 +54,9 @@ export default {
       "getVisualizations",
       "getPopupData"
     ]),
+    isHiddenLayerVisible() {
+      return this.$store.getters.isHiddenLayerVisible;
+    },
     getAccessToken() {
       return process.env.VUE_APP_MAPBOX_TOKEN;
     }
@@ -65,14 +76,9 @@ export default {
       if (this.getPopupData.show) {
         this.setPopupData({ show: false });
       }
-    }
-  },
-  watch: {
-    getLayers(value) {
-      this.loadLayers();
     },
-    getVisualizations(value) {
-      this.loadLayers();
+    setHiddenLayer() {
+      this.$store.dispatch("setHiddenLayer", false);
     }
   },
   async mounted() {
@@ -84,12 +90,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#controls {
+  z-index: 20;
+}
+
+#hidden-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.33);
+}
+
 .console-layout {
   display: flex;
   flex-direction: column;
   height: 100%;
 
   .content-area {
+    z-index: 20;
     display: flex;
     height: 100%;
     position: relative;

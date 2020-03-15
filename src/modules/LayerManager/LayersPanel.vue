@@ -1,21 +1,14 @@
 <template>
   <div class="panel-wrapper">
     <ScaleTransition>
-      <i
-        v-show="!showPanel"
-        class="material-icons layer-toggle"
-        @click="togglePanel"
-        >layers</i
-      >
+      <i v-show="!showPanel" class="material-icons layer-toggle" @click="togglePanel">layers</i>
     </ScaleTransition>
     <ScaleTransition>
       <div v-show="showPanel" class="layers-panel">
         <div class="panel-header">
           <i class="material-icons md-18">layers</i>
           <h3 class="title">Layers</h3>
-          <i class="material-icons md-18 close-btn" @click="togglePanel"
-            >clear</i
-          >
+          <i class="material-icons md-18 close-btn" @click="togglePanel">clear</i>
         </div>
         <div v-if="isLayersLoading" class="loader-wrapper">
           <Loader />
@@ -28,7 +21,11 @@
           :isActive="layer.isActive"
           @click="setActiveLayer({ layerId: layer.id })"
         />
-        <SourceDetails :lastUpdated="getLastUpdated" :sourceURL="'https://github.com/CSSEGISandData/COVID-19'" :sourceName="'Johns Hopkins CSSE'"/>
+        <SourceDetails
+          :lastUpdated="getLastUpdated"
+          :sourceURL="'https://github.com/CSSEGISandData/COVID-19'"
+          :sourceName="'Johns Hopkins CSSE'"
+        />
       </div>
     </ScaleTransition>
   </div>
@@ -51,18 +48,17 @@ export default {
     Loader,
     SourceDetails
   },
-  data() {
-    return {
-      showPanel: false
-    };
-  },
+
   computed: {
     ...mapGetters("Covid19", ["isLayersLoading", "getLastUpdated"]),
+    showPanel() {
+      return this.$store.state.controls.isLayersVisible;
+    }
   },
   methods: {
     ...mapActions("Covid19", ["setActiveLayer", "fetchLastUpdated"]),
     togglePanel() {
-      this.showPanel = !this.showPanel;
+      this.$store.commit("setLayersControlVisible", !this.showPanel);
     }
   },
   mounted() {
