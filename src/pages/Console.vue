@@ -81,6 +81,14 @@ export default {
       this.$store.dispatch("setHiddenLayer", false);
     }
   },
+  watch: {
+    getLayers(value) {
+      this.loadLayers();
+    },
+    getVisualizations(value) {
+      this.loadLayers();
+    }
+  },
   async mounted() {
     this.fetchLayers();
     this.fetchScatterplotLayerData();
