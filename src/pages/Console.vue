@@ -99,14 +99,6 @@ export default {
       this.loadLayers();
     }
   },
-  watch: {
-    getLayers(value) {
-      this.loadLayers();
-    },
-    getVisualizations(value) {
-      this.loadLayers();
-    }
-  },
   async mounted() {
     this.fetchLayers();
     this.fetchScatterplotLayerData();
