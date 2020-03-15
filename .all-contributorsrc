@@ -14,6 +14,15 @@
         "design",
         "code"
       ]
+    },
+    {
+      "login": "rumaan",
+      "name": "Rumaan Khalander",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/18492868?v=4",
+      "profile": "https://rumaan.me",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
