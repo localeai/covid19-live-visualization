@@ -25,22 +25,6 @@ export default new Vuex.Store({
       Object.keys(modules).forEach(moduleName => {
         commit(`${moduleName}/RESET`);
       });
-    },
-    setHiddenLayer({ commit }, val) {
-      commit("setLayersControlVisible", val);
-      commit("setVisualizationsControlVisible", val);
     }
   },
-  getters: {
-    isHiddenLayerVisible: ({ controls }) =>
-      controls.isVisualizationsVisible || controls.isLayersVisible
-  },
-  mutations: {
-    setLayersControlVisible(state, val) {
-      state.controls.isLayersVisible = val;
-    },
-    setVisualizationsControlVisible(state, val) {
-      state.controls.isVisualizationsVisible = val;
-    }
-  }
 });

@@ -1,10 +1,10 @@
 <template>
   <div class="map-chooser-wrapper">
     <scale-transition>
-      <i v-show="!isPanelShown" class="material-icons panel-toggle" @click="togglePanel()">map</i>
+      <i v-show="!showPanel" class="material-icons panel-toggle" @click="togglePanel()">map</i>
     </scale-transition>
     <SlideXRightTransition>
-      <div v-show="isPanelShown" class="maps-panel">
+      <div v-show="showPanel" class="maps-panel">
         <div class="panel-header">
           <i class="material-icons md-18">map</i>
           <h3 class="title">Visualization</h3>
@@ -26,7 +26,7 @@
 
 <script>
 import { ScaleTransition, SlideXRightTransition } from "vue2-transitions";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   props: {
@@ -37,14 +37,21 @@ export default {
     SlideXRightTransition
   },
   computed: {
-    isPanelShown() {
-      return this.$store.state.controls.isVisualizationsVisible;
+    ...mapGetters("UI", ["isVisualizationControlsVisible"]),
+    showPanel: {
+      get() {
+        return this.isVisualizationControlsVisible;
+      },
+      set(value) {
+        this.setVisualizationControlVisible(value);
+      }
     }
   },
   methods: {
     ...mapActions("Covid19", ["setActiveVisualization"]),
+    ...mapActions("UI", ["setVisualizationControlVisible"]),
     togglePanel() {
-      this.$store.commit("setVisualizationsControlVisible", !this.isPanelShown);
+      this.showPanel = !this.showPanel;
     }
   }
 };

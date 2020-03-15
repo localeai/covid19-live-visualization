@@ -65,6 +65,9 @@ export default {
           pitch: viewState.pitch
         });
         this.$emit("viewStateChange");
+      },
+      onClick: (event, info) => {
+        this.$emit("viewClicked", { event, info });
       }
     });
 

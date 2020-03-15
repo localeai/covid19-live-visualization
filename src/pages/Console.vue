@@ -7,7 +7,8 @@
         :latitude="0"
         :longitude="0"
         :layers="geoLayers"
-        @viewStateChange="hidePopup"
+        @viewStateChange="handleViewStateChanged"
+        @viewClicked="handleViewClicked"
       />
 
       <!-- Controls Layer -->
@@ -54,6 +55,7 @@ export default {
       "getVisualizations",
       "getPopupData"
     ]),
+    ...mapGetters("UI", ["isControlsVisible"]),
     isHiddenLayerVisible() {
       return this.$store.getters.isHiddenLayerVisible;
     },
@@ -69,16 +71,32 @@ export default {
       "getActiveGeoLayer",
       "setPopupData"
     ]),
+    ...mapActions("UI", ["hideControls"]),
     async loadLayers() {
       this.geoLayers = [await this.getActiveGeoLayer()];
     },
-    hidePopup() {
+    handleViewStateChanged() {
       if (this.getPopupData.show) {
         this.setPopupData({ show: false });
       }
+      // hide the controls on view state change
+      if (this.isControlsVisible) {
+        this.hideControls();
+      }
     },
-    setHiddenLayer() {
-      this.$store.dispatch("setHiddenLayer", false);
+    handleViewClicked() {
+       // hide the controls on view clicks
+      if (this.isControlsVisible) {
+        this.hideControls();
+      }
+    }
+  },
+  watch: {
+    getLayers(value) {
+      this.loadLayers();
+    },
+    getVisualizations(value) {
+      this.loadLayers();
     }
   },
   async mounted() {

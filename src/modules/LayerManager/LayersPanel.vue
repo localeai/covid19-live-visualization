@@ -51,14 +51,21 @@ export default {
 
   computed: {
     ...mapGetters("Covid19", ["isLayersLoading", "getLastUpdated"]),
-    showPanel() {
-      return this.$store.state.controls.isLayersVisible;
+    ...mapGetters("UI", ["isLayerControlsVisible"]),
+    showPanel: {
+      get() {
+        return this.isLayerControlsVisible;
+      },
+      set(value) {
+        this.setLayerControlsVisible(value);
+      }
     }
   },
   methods: {
     ...mapActions("Covid19", ["setActiveLayer", "fetchLastUpdated"]),
+    ...mapActions("UI", ["setLayerControlsVisible"]),
     togglePanel() {
-      this.$store.commit("setLayersControlVisible", !this.showPanel);
+      this.showPanel = !this.showPanel;
     }
   },
   mounted() {
