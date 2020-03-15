@@ -56,7 +56,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="http://haxzie.com"><img src="https://avatars1.githubusercontent.com/u/53584487?v=4" width="100px;" alt=""/><br /><sub><b>Musthaq Ahamad</b></sub></a><br /><a href="#design-haxzie" title="Design">🎨</a></td>
+    <td align="center"><a href="http://haxzie.com"><img src="https://avatars1.githubusercontent.com/u/53584487?v=4" width="100px;" alt=""/><br /><sub><b>Musthaq Ahamad</b></sub></a><br /><a href="#design-haxzie" title="Design">🎨</a> <a href="https://github.com/localeai/covid19-live-visualization/commits?author=haxzie" title="Code">💻</a></td>
   </tr>
 </table>
 
