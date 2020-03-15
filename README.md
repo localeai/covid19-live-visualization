@@ -38,5 +38,8 @@ VUE_APP_API_REPO_URL=https://api.github.com/repos/haxzie/covid19-layers-api
 - [MapboxGL.js](https://github.com/mapbox/mapbox-gl-js)
 - [chroma.js](https://github.com/gka/chroma.js)
 
+## APIs Used (Thanks for the creators :heart: )
+- [corona-virus-tracker-api](https://github.com/ExpDev07/coronavirus-tracker-api) by [ExpDev07](https://github.com/ExpDev07)
+- [Data for Indian states](https://exec.clay.run/kunksed/mohfw-covid) by [Raj Kunkolienkar](https://twitter.com/kunksed)
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
