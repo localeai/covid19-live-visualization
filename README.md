@@ -1,4 +1,7 @@
 # COVID19 Visualization
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 > Please note. The data used in the visualization is from an [opensource project](https://github.com/ExpDev07/coronavirus-tracker-api). We don't guarantee accurate numbers, but we are trying our best to find a reliable source of data.
 
 ![](https://github.com/localeai/covid19-live-visualization/raw/master/public/meta.png)
@@ -43,3 +46,23 @@ VUE_APP_API_REPO_URL=https://api.github.com/repos/haxzie/covid19-layers-api
 - [Data for Indian states](https://exec.clay.run/kunksed/mohfw-covid) by [Raj Kunkolienkar](https://twitter.com/kunksed)
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://haxzie.com"><img src="https://avatars1.githubusercontent.com/u/53584487?v=4" width="100px;" alt=""/><br /><sub><b>Musthaq Ahamad</b></sub></a><br /><a href="#design-haxzie" title="Design">🎨</a> <a href="https://github.com/localeai/covid19-live-visualization/commits?author=haxzie" title="Code">💻</a></td>
+    <td align="center"><a href="https://rumaan.me"><img src="https://avatars1.githubusercontent.com/u/18492868?v=4" width="100px;" alt=""/><br /><sub><b>Rumaan Khalander</b></sub></a><br /><a href="https://github.com/localeai/covid19-live-visualization/commits?author=rumaan" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
