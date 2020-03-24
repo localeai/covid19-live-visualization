@@ -1,27 +1,38 @@
 <template>
-    <div v-if="getPopupData && getPopupData.show" class="geopopup" :style="{ transform: `translate(${getPopupData.x +10}px, ${getPopupData.y +15}px )`}">
-      <div class="popup-header">
-        <i class="material-icons header-icon">bug_report</i>
-        <div class="text-area">
-          <h4>{{ getPopupData.title }}</h4>
-          <span>{{ getPopupData.description }}</span>
-        </div>
-      </div>
-      <div class="content-area">
-        <div class="content-item">
-          <h4>Confirmed</h4>
-          <span>{{ getPopupData.confirmed }}</span>
-        </div>
-        <div class="content-item">
-          <h4>Deaths</h4>
-          <span>{{ getPopupData.deaths }}</span>
-        </div>
-        <div class="content-item">
-          <h4>Recovered</h4>
-          <span>{{ getPopupData.recovered }}</span>
-        </div>
+  <div
+    v-if="getPopupData && getPopupData.show"
+    class="geopopup"
+    :style="{
+      transform: `translate(${getPopupData.x + 10}px, ${getPopupData.y +
+        15}px )`
+    }"
+  >
+    <div class="popup-header">
+      <i class="material-icons header-icon">bug_report</i>
+      <div class="text-area">
+        <h4>{{ getPopupData.title }}</h4>
+        <span>{{ getPopupData.description }}</span>
       </div>
     </div>
+    <div class="content-area">
+      <div class="content-item">
+        <h4>Confirmed</h4>
+        <span>{{ getPopupData.confirmed }}</span>
+      </div>
+      <div class="content-item">
+        <h4>Existing</h4>
+        <span>{{ getPopupData.existing }}</span>
+      </div>
+      <div class="content-item">
+        <h4>Deaths</h4>
+        <span>{{ getPopupData.deaths }}</span>
+      </div>
+      <div class="content-item">
+        <h4>Recovered</h4>
+        <span>{{ getPopupData.recovered }}</span>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

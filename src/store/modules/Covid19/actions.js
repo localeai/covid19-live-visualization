@@ -75,15 +75,32 @@ export default {
             result.confirmed.push(item.data.confirmed);
             result.deaths.push(item.data.deaths);
             result.recovered.push(item.data.recovered);
+            result.existing.push(item.data.existing);
             return result;
           },
-          { confirmed: [], deaths: [], recovered: [] }
+          { confirmed: [], deaths: [], recovered: [], existing: [] }
         );
 
-        const confirmedBuckets = limits(numbers.confirmed.filter(item => item!== 0), "l", 10);
-        const deathsBuckets = limits(numbers.deaths.filter(item => item!== 0), "l", 10);
-        const recoveredBuckets = limits(numbers.recovered.filter(item => item!== 0), "l", 10);
-
+        const confirmedBuckets = limits(
+          numbers.confirmed.filter(item => item !== 0),
+          "l",
+          10
+        );
+        const deathsBuckets = limits(
+          numbers.deaths.filter(item => item !== 0),
+          "l",
+          10
+        );
+        const recoveredBuckets = limits(
+          numbers.recovered.filter(item => item !== 0),
+          "l",
+          10
+        );
+        const existingBuckets = limits(
+          numbers.existing.filter(item => item > 0),
+          "l",
+          10
+        );
         const coloredData = data.map(item => {
           return {
             ...item,
@@ -92,7 +109,9 @@ export default {
                 colors[getRangeIndex(confirmedBuckets, item.data.confirmed)],
               deaths: colors[getRangeIndex(deathsBuckets, item.data.deaths)],
               recovered:
-                colors[getRangeIndex(recoveredBuckets, item.data.recovered)]
+                colors[getRangeIndex(recoveredBuckets, item.data.recovered)],
+              existing:
+                colors[getRangeIndex(existingBuckets, item.data.existing)]
             }
           };
         });
@@ -117,14 +136,32 @@ export default {
             result.confirmed.push(item.data.confirmed);
             result.deaths.push(item.data.deaths);
             result.recovered.push(item.data.recovered);
+            result.existing.push(item.data.existing);
             return result;
           },
-          { confirmed: [], deaths: [], recovered: [] }
+          { confirmed: [], deaths: [], recovered: [], existing: [] }
         );
 
-        const confirmedBuckets = limits(numbers.confirmed.filter(item => item!== 0), "l", 10);
-        const deathsBuckets = limits(numbers.deaths.filter(item => item!== 0), "l", 10);
-        const recoveredBuckets = limits(numbers.recovered.filter(item => item!== 0), "l", 10);
+        const confirmedBuckets = limits(
+          numbers.confirmed.filter(item => item !== 0),
+          "l",
+          10
+        );
+        const deathsBuckets = limits(
+          numbers.deaths.filter(item => item !== 0),
+          "l",
+          10
+        );
+        const recoveredBuckets = limits(
+          numbers.recovered.filter(item => item !== 0),
+          "l",
+          10
+        );
+        const existingBuckets = limits(
+          numbers.existing.filter(item => item > 0),
+          "l",
+          10
+        );
 
         const coloredData = data.features.map(item => {
           return {
@@ -149,7 +186,8 @@ export default {
                       recoveredBuckets,
                       item.properties.data.recovered
                     )
-                  ]
+                  ],
+                  existing: colors[getRangeIndex(existingBuckets, item.properties.data.existing)]
               }
             }
           };
@@ -288,12 +326,17 @@ export default {
       const response = await getLatestCommit();
       const { status, data } = response;
       if (status === 200 && data) {
-        const { commit: { author: { date } }} = data;
+        const {
+          commit: {
+            author: { date }
+          }
+        } = data;
         const _date = new Date(date);
-        const formattedDate = `${_date.getDate()}/${_date.getMonth()+1}/${_date.getFullYear()}`
+        const formattedDate = `${_date.getDate()}/${_date.getMonth() +
+          1}/${_date.getFullYear()}`;
         commit(types.SET_LAST_UPDATED, formattedDate);
       }
-    } catch(error) {
+    } catch (error) {
       console.error(error);
     }
   }
