@@ -244,8 +244,8 @@ export default {
                 itemX = x;
               }
 
-              if (offsetHeight - y < 300) {
-                itemY = offsetHeight - (250 + (offsetHeight - y));
+              if (offsetHeight - y < 350) {
+                itemY = offsetHeight - (300 + (offsetHeight - y));
               } else {
                 itemY = y;
               }
@@ -296,8 +296,8 @@ export default {
                 itemX = x;
               }
 
-              if (offsetHeight - y < 300) {
-                itemY = offsetHeight - (250 + (offsetHeight - y));
+              if (offsetHeight - y < 350) {
+                itemY = offsetHeight - (300 + (offsetHeight - y));
               } else {
                 itemY = y;
               }
