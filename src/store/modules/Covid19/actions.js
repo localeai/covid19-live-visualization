@@ -82,17 +82,17 @@ export default {
         );
 
         const confirmedBuckets = limits(
-          numbers.confirmed.filter(item => item !== 0),
+          numbers.confirmed.filter(item => item > 0),
           "l",
           10
         );
         const deathsBuckets = limits(
-          numbers.deaths.filter(item => item !== 0),
+          numbers.deaths.filter(item => item > 0),
           "l",
           10
         );
         const recoveredBuckets = limits(
-          numbers.recovered.filter(item => item !== 0),
+          numbers.recovered.filter(item => item > 0),
           "l",
           10
         );
@@ -143,17 +143,17 @@ export default {
         );
 
         const confirmedBuckets = limits(
-          numbers.confirmed.filter(item => item !== 0),
+          numbers.confirmed.filter(item => item > 0),
           "l",
           10
         );
         const deathsBuckets = limits(
-          numbers.deaths.filter(item => item !== 0),
+          numbers.deaths.filter(item => item > 0),
           "l",
           10
         );
         const recoveredBuckets = limits(
-          numbers.recovered.filter(item => item !== 0),
+          numbers.recovered.filter(item => item > 0),
           "l",
           10
         );
