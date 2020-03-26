@@ -9,12 +9,42 @@ import { getLatestCommit } from "@/api/github";
 import { ScatterplotLayer, GeoJsonLayer } from "@deck.gl/layers";
 import chroma, { limits, scale } from "chroma-js";
 
+/**
+* returns where the item falls within a range of numbers
+* @param {Array[Number]} range 
+* @param {Number} item
+*/
 function getRangeIndex(range, item) {
   for (let i = 0; i < range.length - 1; i++) {
     if (item >= range[i] && item <= range[i + 1]) {
       return i;
     }
   }
+}
+
+/**
+ * returns a bucket for a list of numbers
+ * @param {Array[Number]} itemList List of all the numbers
+ * @param {Number} buckets Number of buckets
+ */
+function generateBuckets(itemList, buckets) {
+  return limits(
+    itemList.filter(item => item > 0),
+    "l",
+    buckets
+  );
+}
+
+/**
+ * generates range of colors (rgb) in between a set of colors 
+ * @param {Array[String]} colors Array of colors in hex
+ * @param {Number} range Number of colors needed
+ */
+function generateColorRange(colors, range) {
+  return scale(colors)
+    .mode("lch")
+    .colors(range)
+    .map(item => chroma(item).rgb());
 }
 
 export default {
@@ -66,10 +96,7 @@ export default {
       const response = await fetchScatterplotLayer();
       const { status, data } = response;
       if (status === 200 && data) {
-        const colors = scale(["#fcba03", "#fc0339"])
-          .mode("lch")
-          .colors(10)
-          .map(item => chroma(item).rgb());
+        const colors = generateColorRange(["#fcba03", "#fc0339"], 10);
         const numbers = data.reduce(
           (result, item) => {
             result.confirmed.push(item.data.confirmed);
@@ -81,26 +108,11 @@ export default {
           { confirmed: [], deaths: [], recovered: [], existing: [] }
         );
 
-        const confirmedBuckets = limits(
-          numbers.confirmed.filter(item => item !== 0),
-          "l",
-          10
-        );
-        const deathsBuckets = limits(
-          numbers.deaths.filter(item => item !== 0),
-          "l",
-          10
-        );
-        const recoveredBuckets = limits(
-          numbers.recovered.filter(item => item !== 0),
-          "l",
-          10
-        );
-        const existingBuckets = limits(
-          numbers.existing.filter(item => item > 0),
-          "l",
-          10
-        );
+        const confirmedBuckets = generateBuckets(numbers.confirmed, 10);
+        const deathsBuckets = generateBuckets(numbers.deaths, 10);
+        const recoveredBuckets = generateBuckets(numbers.recovered, 10);
+        const existingBuckets = generateBuckets(numbers.existing, 10);
+
         const coloredData = data.map(item => {
           return {
             ...item,
@@ -127,10 +139,7 @@ export default {
       const response = await fetchGeoJSONLayer();
       const { status, data } = response;
       if (status === 200 && data) {
-        const colors = scale(["#f7da8f", "#fc0339"])
-          .mode("lch")
-          .colors(10)
-          .map(item => chroma(item).rgb());
+        const colors = generateColorRange(["#f7da8f", "#fc0339"], 10);
         const numbers = data.features.reduce(
           (result, { properties: item }) => {
             result.confirmed.push(item.data.confirmed);
@@ -142,26 +151,10 @@ export default {
           { confirmed: [], deaths: [], recovered: [], existing: [] }
         );
 
-        const confirmedBuckets = limits(
-          numbers.confirmed.filter(item => item !== 0),
-          "l",
-          10
-        );
-        const deathsBuckets = limits(
-          numbers.deaths.filter(item => item !== 0),
-          "l",
-          10
-        );
-        const recoveredBuckets = limits(
-          numbers.recovered.filter(item => item !== 0),
-          "l",
-          10
-        );
-        const existingBuckets = limits(
-          numbers.existing.filter(item => item > 0),
-          "l",
-          10
-        );
+        const confirmedBuckets = generateBuckets(numbers.confirmed, 10);
+        const deathsBuckets = generateBuckets(numbers.deaths, 10);
+        const recoveredBuckets = generateBuckets(numbers.recovered, 10);
+        const existingBuckets = generateBuckets(numbers.existing, 10);
 
         const coloredData = data.features.map(item => {
           return {
@@ -187,7 +180,13 @@ export default {
                       item.properties.data.recovered
                     )
                   ],
-                  existing: colors[getRangeIndex(existingBuckets, item.properties.data.existing)]
+                existing:
+                  colors[
+                    getRangeIndex(
+                      existingBuckets,
+                      item.properties.data.existing
+                    )
+                  ]
               }
             }
           };
