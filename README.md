@@ -42,8 +42,13 @@ VUE_APP_API_REPO_URL=https://api.github.com/repos/haxzie/covid19-layers-api
 - [chroma.js](https://github.com/gka/chroma.js)
 
 ## APIs Used (Thanks for the creators :heart: )
+- [Covid19 Layers API](https://github.com/haxzie/covid19-layers-api) by [haxzie](https://github.com/haxzie)
 - [corona-virus-tracker-api](https://github.com/ExpDev07/coronavirus-tracker-api) by [ExpDev07](https://github.com/ExpDev07)
-- [Data for Indian states](https://exec.clay.run/kunksed/mohfw-covid) by [Raj Kunkolienkar](https://twitter.com/kunksed)
+
+## DataSources
+- [CSSEGISandData JhonHopkins](https://github.com/CSSEGISandData/COVID-19)
+- [Ministry of Health and Welfare India](https://mohfw.gov.in)
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
