@@ -222,7 +222,7 @@ export default {
           filled: true,
           radiusScale: 6,
           radiusMinPixels: 5,
-          radiusMaxPixels: 30,
+          radiusMaxPixels: 20,
           lineWidthMinPixels: 1,
           getPosition: d => d.location.map(item => parseFloat(item)),
           getRadius: d => d.data[state.activeLayer] * 50,
