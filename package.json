@@ -12,7 +12,7 @@
     "@deck.gl/core": "^8.1.7",
     "@deck.gl/layers": "^8.1.7",
     "@deck.gl/mapbox": "^8.1.7",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "chroma-js": "^2.1.0",
     "core-js": "^3.6.5",
     "lodash": "^4.17.15",
